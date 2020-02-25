@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Виселица!</title>
+</head>
+
+<body>
+    <h1>Виселица!</h1>
+    <script>
+    var words = ["трдельник", "гуатанамо", "лось", "морда", "воробей", "избач", "котлован", "миллиард", "медиатор", "сундук", "ус", "двигатель", "троллейбус", "апельсин", "лук", "шпага", "штепсель", "указатель"];
+    var word = words[Math.floor(Math.random() * words.length)];
+    var answerArray = [];
+    for (var i = 0; i < word.length; i++) {
+        answerArray[i] = "_";
+    }
+    var remainingLetters = word.length;
+    var attempt = 3;
+    var newRemainingLetters = remainingLetters;
+    while ((remainingLetters > 0) && (attempt !== 0)) {
+        alert("Жизней: " + attempt + "\n" + answerArray.join(" ") + "\n" + remainingLetters + " осталось угадать");
+        var guess = prompt("Угадайте букву или нажмите Отмена для выхода из игры.").toLowerCase();
+        if (guess === null) {
+            break;
+        } else if (guess.length > 1) {
+            alert("Пожалуйста, введите только одну букву.");
+        } else if (guess.length < 1) {
+            alert("Пожалуйста, введите букву.");
+        } else {
+            for (var j = 0; j < word.length; j++) {
+                if (answerArray[j] === guess) {
+                    alert("Извините, эта буква уже угадана. Попробуйте заново.")
+                    break;
+                }
+                if (word[j] === guess) {
+                    answerArray[j] = guess;
+                    remainingLetters--;
+                }
+            }
+        }
+        if (remainingLetters === newRemainingLetters) {
+            attempt--;
+        }
+        newRemainingLetters = remainingLetters;
+    }
+    if (attempt === 0) {
+        alert("О нет! Кончились все жизни :( Загаданное слово было: " + word);
+    } else if (remainingLetters === 0) {
+        alert("Молодец!!! Загаданное слово было: " + word);
+    } else {
+        alert("Хммм.... окей, пока.. (-_-) ");
+    }
+    </script>
+</body>
+
+</html>
